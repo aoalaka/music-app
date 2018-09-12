@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/artists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#e04e0f"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:text="Artists"
+        android:textColor="#fffbf9" />
+
+    <TextView
+        android:id="@+id/albums"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#28201c"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:text="Albums"
+        android:textColor="#fffbf9" />
+
+    <TextView
+        android:id="@+id/songs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#1e0e07"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:text="Songs"
+        android:textColor="#fffbf9" />
+
+    <TextView
+        android:id="@+id/playlists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#702c0e"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:text="Playlists"
+        android:textColor="#fffbf9" />
+
+
+</LinearLayout>
