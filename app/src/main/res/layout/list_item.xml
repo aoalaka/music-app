@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:id="@+id/song_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textStyle="bold"
+            tools:text="tafseeru suuratil faatiha" />
+
+        <TextView
+            android:id="@+id/song_length_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:text="55:55" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/artist_name_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        tools:text="Dr Abdurrazaaq Alaro" />
+
+</LinearLayout>
