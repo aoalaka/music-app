@@ -27,36 +27,28 @@ public class AlbumAdapter extends ArrayAdapter<Song> {
 
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_item, parent, false);
+                    R.layout.list_item_1, parent, false);
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list_item
+        // Get the {@link Song} object located at this position in the list_item
         Song currentSong = getItem(position);
 
-        // Find the TextView in the list_item.xml layout with the ID version_name
-        TextView songTitleTextView = (TextView) listItemView.findViewById(R.id.song_title_text_view);
-        // Get the version name from the current AndroidFlavor object and
+        // Find the TextView in the list_item.xml layout with the ID song_title_text_view
+        TextView songTitleTextView = (TextView) listItemView.findViewById(R.id.heading_text_view);
+        // Get the version name from the current Song object and
         // set this text on the name TextView
-        songTitleTextView.setText(currentSong.getSongTitle());
+        songTitleTextView.setText(currentSong.getSource());
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
-        TextView artistNameTextView = (TextView) listItemView.findViewById(R.id.artist_name_text_view);
-        // Get the version number from the current AndroidFlavor object and
+        // Find the TextView in the list_item.xml layout with the ID artist_name_text_view
+        TextView artistNameTextView = (TextView) listItemView.findViewById(R.id.sub_heading_text_view);
+        // Get the version number from the current Song object and
         // set this text on the number TextView
         artistNameTextView.setText(currentSong.getArtistName());
-/*
-        // Find the TextView in the list_item.xml layout with the ID version_number
-        TextView songLengthTextView = (TextView) listItemView.findViewById(R.id.song_length_text_view);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
-        songLengthTextView.setText(currentSong.getSongLength());*/
 
-        // Return the whole list_item item layout (containing 3 TextViews)
+        // Return the whole list_item item layout (containing 2 TextViews)
         // so that it can be shown in the ListView
         return listItemView;
     }
-
-
 }
 
 

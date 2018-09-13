@@ -11,9 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class SongAdapter extends ArrayAdapter<Song> {
-
-    public SongAdapter(Activity context, ArrayList<Song> songs) {
+public class ArtistAdapter extends ArrayAdapter<Song> {
+    public ArtistAdapter(Activity context, ArrayList<Song> songs) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list_item.
         // the second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
@@ -28,30 +27,19 @@ public class SongAdapter extends ArrayAdapter<Song> {
 
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_item, parent, false);
+                    R.layout.list_item_1, parent, false);
         }
 
         // Get the {@link Song} object located at this position in the list_item
         Song currentSong = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID song_title_text_view
-        TextView songTitleTextView = (TextView) listItemView.findViewById(R.id.song_title_text_view);
+        TextView artistName = (TextView) listItemView.findViewById(R.id.heading_text_view);
         // Get the version name from the current Song object and
         // set this text on the name TextView
-        songTitleTextView.setText(currentSong.getSongTitle());
+        artistName.setText(currentSong.getArtistName());
 
-        // Find the TextView in the list_item.xml layout with the ID artist_name_text_view
-        TextView artistNameTextView = (TextView) listItemView.findViewById(R.id.artist_name_text_view);
-        // Get the version number from the current Song object and
-        // set this text on the number TextView
-        artistNameTextView.setText(currentSong.getArtistName());
-        // Find the TextView in the list_item.xml layout with the ID song_length_text_view
-        TextView songLengthTextView = (TextView) listItemView.findViewById(R.id.song_length_text_view);
-        // Get the version number from the current Song object and
-        // set this text on the number TextView
-        songLengthTextView.setText(currentSong.getSongLength());
-
-        // Return the whole list_item item layout (containing 3 TextViews)
+        // Return the whole list_item item layout (containing 2 TextViews)
         // so that it can be shown in the ListView
         return listItemView;
     }

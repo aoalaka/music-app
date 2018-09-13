@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:paddingLeft="16dp"
-    android:orientation="vertical">
+    android:paddingTop="16dp">
 
     <TextView
+        android:id="@+id/heading_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="download"
-        android:id="@+id/src_text_view"/>
+        tools:text="download" />
+
     <TextView
+        android:id="@+id/sub_heading_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Dr Alaro"
-        android:id="@+id/artist_name_text_view"/>
+        tools:text="Dr Alaro" />
 
 </LinearLayout>
