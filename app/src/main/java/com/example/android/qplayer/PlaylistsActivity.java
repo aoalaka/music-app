@@ -14,12 +14,12 @@ public class PlaylistsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.songs_list);
 
-        ArrayList<String> playlist = new ArrayList<String>();
+        ArrayList<String> playlist = new ArrayList<>();
 
         playlist.add("Recently added");
         playlist.add("My recordings");
 
-        ArrayAdapter<String> playListAdapter = new ArrayAdapter<String>(this, R.layout.list_item_1, playlist);
+        ArrayAdapter<String> playListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, playlist);
 
         ListView listView = (ListView)findViewById(R.id.list);
         listView.setAdapter(playListAdapter);
