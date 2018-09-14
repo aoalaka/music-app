@@ -66,7 +66,7 @@ public class Song {
     }
 
     /**
-     * Returns whether or not there is an image for this word.
+     * Returns whether or not there is an image for this song.
      */
     public boolean hasImage() {
         return mImageResourceId != NO_IMAGE_PROVIDED;

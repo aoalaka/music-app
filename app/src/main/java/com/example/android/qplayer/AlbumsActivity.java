@@ -2,9 +2,6 @@ package com.example.android.qplayer;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListView;
-
-import java.util.ArrayList;
 
 public class AlbumsActivity extends AppCompatActivity {
 
@@ -13,7 +10,7 @@ public class AlbumsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.songs_list);
 
-        ArrayList<Song> songs = new ArrayList<Song>();
+ /*       ArrayList<Song> songs = new ArrayList<Song>();
 
         songs.add(new Song());
 
@@ -22,7 +19,7 @@ public class AlbumsActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.list);
 
-        listView.setAdapter(albumAdapter);
+        listView.setAdapter(albumAdapter);*/
 
     }
 }
