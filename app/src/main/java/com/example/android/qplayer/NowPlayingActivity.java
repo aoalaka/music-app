@@ -58,37 +58,62 @@ public class NowPlayingActivity extends AppCompatActivity {
             releaseMediaPlayer();
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_now_playing);
 
-       final int songIdFromSongsActivity = getIntent().getExtras().getInt("position");
-       String songTitleFromSongsActivity = getIntent().getExtras().getString("title");
+        final int songIdFromSongsActivity = getIntent().getExtras().getInt("position");
+        final String songTitleFromSongsActivity = getIntent().getExtras().getString("title");
 
-       TextView titleBar = (TextView) findViewById(R.id.song_title_now_playing);
-       titleBar.setText(songTitleFromSongsActivity + " is now playing");
+        TextView titleBar = (TextView) findViewById(R.id.song_title_now_playing);
+        titleBar.setText(songTitleFromSongsActivity + " is ready");
 
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         final ArrayList<Song> songs = new ArrayList<Song>();
 
-        songs.add(new Song("Qur'an 105", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_105, 1));
-        songs.add(new Song("Qur'an 106", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_106, 2));
-        songs.add(new Song("Qur'an 107", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_107, 3));
-        songs.add(new Song("Qur'an 108", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_108, 4));
-        songs.add(new Song("Qur'an 109", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_109, 5));
-        songs.add(new Song("Qur'an 110", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_110, 6));
-        songs.add(new Song("Qur'an 111", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_111, 7));
-        songs.add(new Song("Qur'an 112", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_112, 8));
-        songs.add(new Song("Qur'an 113", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_113, 9));
-        songs.add(new Song("Qur'an 114", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_114, 10));
+        songs.add(new Song("Qur'an 105", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_105, 0));
+        songs.add(new Song("Qur'an 106", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_106, 1));
+        songs.add(new Song("Qur'an 107", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_107, 2));
+        songs.add(new Song("Qur'an 108", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_108, 3));
+        songs.add(new Song("Qur'an 109", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_109, 4));
+        songs.add(new Song("Qur'an 110", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_110, 5));
+        songs.add(new Song("Qur'an 111", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_111, 6));
+        songs.add(new Song("Qur'an 112", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_112, 7));
+        songs.add(new Song("Qur'an 113", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_113, 8));
+        songs.add(new Song("Qur'an 114", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_114, 9));
 
-        ImageView playPauseArrow = (ImageView) findViewById(R.id.play_pause);
+        final Song songClicked = songs.get(songIdFromSongsActivity);
+        mMediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songClicked.getAudioResourceId());
+        // Start the audio file
+        mMediaPlayer.start();
 
-        playPauseArrow.setOnClickListener(new View.OnClickListener() {
+
+        final int prevSongId;
+        final int nextSongId;
+
+
+        if (songs.get(songIdFromSongsActivity).getTextViewId() > 0) {
+            prevSongId = songIdFromSongsActivity - 1;
+        } else {
+            prevSongId = songIdFromSongsActivity;
+        }
+        if (songs.get(songIdFromSongsActivity).getTextViewId() < songs.size() - 1) {
+            nextSongId = songIdFromSongsActivity + 1;
+        } else {
+            nextSongId = songIdFromSongsActivity;
+        }
+
+        //Selects the play-pause image
+        ImageView playPauseIcon = (ImageView) findViewById(R.id.play_pause);
+
+        playPauseIcon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick( View v) {
+            public void onClick(View v) {
+                TextView titleBar = (TextView) findViewById(R.id.song_title_now_playing);
+                titleBar.setText(songTitleFromSongsActivity + " is now playing");
                 // Release the media player if                   it currently exists because we are about to
                 // play a different sound file
                 releaseMediaPlayer();
@@ -108,6 +133,63 @@ public class NowPlayingActivity extends AppCompatActivity {
                     // with the song clicked
                     final Song songClicked = songs.get(songIdFromSongsActivity);
                     mMediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songClicked.getAudioResourceId());
+                    /*// Start the audio file
+                    mMediaPlayer.pause();
+                    mMediaPlayer.seekTo(0);*/
+
+                    if (mMediaPlayer.isPlaying()){
+                        mMediaPlayer.pause();
+                        mMediaPlayer.seekTo(0);
+                        ImageView playPauseIcon = (ImageView) findViewById(R.id.play_pause);
+                        playPauseIcon.setImageResource(R.drawable.icons8_play_50);
+                    } else {
+                        mMediaPlayer.start();
+                        ImageView playPauseIcon = (ImageView) findViewById(R.id.play_pause);
+                        playPauseIcon.setImageResource(R.drawable.icons8_pause_50);
+                    }
+                    // Setup a listener on the media player, so that we can stop and release the
+                    // media player once the sound has finished playing.
+                    //mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onCompletion(MediaPlayer mp) {
+                            String songTitle = songClicked.getSongTitle().toUpperCase();
+                            Toast.makeText(NowPlayingActivity.this, songTitle + " has finished playing", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+        //Select the previous_audio icon
+        ImageView prevIcon = (ImageView) findViewById(R.id.previous);
+
+
+        prevIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(songs.get(songIdFromSongsActivity).getTextViewId() > 0)){
+                    Toast.makeText(NowPlayingActivity.this, "You clicked the first file on the list", Toast.LENGTH_SHORT).show();
+                }
+                    TextView titleBar = (TextView) findViewById(R.id.song_title_now_playing);
+                String currentSongId = songs.get(prevSongId).getSongTitle();
+                titleBar.setText(currentSongId + " is now playing");
+                // Release the media player if                   it currently exists because we are about to
+                // play a different sound file
+                releaseMediaPlayer();
+
+
+                // Request audio focus so in order to play the audio file. The app needs to play a
+                // short audio file, so we will request audio focus with a short amount of time
+                // with AUDIOFOCUS_GAIN_TRANSIENT.
+                int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                        AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    // We have audio focus now.
+                    // Create and setup the {@link MediaPlayer} for the audio resource associated
+                    // with the song clicked
+                    final Song songClicked = songs.get(prevSongId);
+                    mMediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songClicked.getAudioResourceId());
 
                     // Start the audio file
                     mMediaPlayer.start();
@@ -118,12 +200,63 @@ public class NowPlayingActivity extends AppCompatActivity {
                     mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         public void onCompletion(MediaPlayer mp) {
                             String songTitle = songClicked.getSongTitle().toUpperCase();
-                            Toast.makeText(NowPlayingActivity.this, "The song " + songTitle + " is finished", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NowPlayingActivity.this, songTitle + " has finished playing", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             }
         });
+
+        //Select the next_audio icon
+        ImageView nextIcon = (ImageView) findViewById(R.id.next);
+
+
+        nextIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(songs.get(songIdFromSongsActivity).getTextViewId() < songs.size() - 1)){
+                    Toast.makeText(NowPlayingActivity.this, "You clicked the last file on the list", Toast.LENGTH_SHORT).show();
+                }
+
+                    TextView titleBar = (TextView) findViewById(R.id.song_title_now_playing);
+                String currentSongId = songs.get(nextSongId).getSongTitle();
+                titleBar.setText(currentSongId + " is now playing");
+                // Release the media player if                   it currently exists because we are about to
+                // play a different sound file
+                releaseMediaPlayer();
+
+               /* // Get the {@link Song} object at the given position the user clicked on
+                Song song = songs.get(position);*/
+
+                // Request audio focus so in order to play the audio file. The app needs to play a
+                // short audio file, so we will request audio focus with a short amount of time
+                // with AUDIOFOCUS_GAIN_TRANSIENT.
+                int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                        AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    // We have audio focus now.
+                    // Create and setup the {@link MediaPlayer} for the audio resource associated
+                    // with the song clicked
+                    final Song songClicked = songs.get(nextSongId);
+                    mMediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songClicked.getAudioResourceId());
+
+                    // Start the audio file
+                    mMediaPlayer.start();
+
+                    // Setup a listener on the media player, so that we can stop and release the
+                    // media player once the sound has finished playing.
+                    //mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onCompletion(MediaPlayer mp) {
+                            String songTitle = songClicked.getSongTitle().toUpperCase();
+                            Toast.makeText(NowPlayingActivity.this, songTitle + " has finished playing", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
     }
 
     private void releaseMediaPlayer() {

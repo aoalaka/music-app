@@ -4,15 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="32dp"
-    android:paddingLeft="16dp"
-    android:background="#702c0e">
+    android:background="#474733">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/song_title_now_playing"
         android:paddingBottom="16dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:textSize="@dimen/font_large"
+        android:textStyle="bold"
+        android:textColor="#f9f9f7"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,18 +31,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/previous"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@drawable/icons8_rewind_50"
+            android:padding="16dp"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/play_pause"
-            android:src="@drawable/music_player_icon"
-            android:layout_weight="1"/>
+            android:src="@drawable/icons8_pause_50"
+            android:layout_weight="1"
+            android:padding="16dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/next"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@drawable/icons8_fast_forward_50"
+            android:padding="16dp"/>
     </LinearLayout>
 </LinearLayout>

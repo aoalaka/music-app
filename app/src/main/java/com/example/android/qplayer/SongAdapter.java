@@ -31,16 +31,16 @@ public class SongAdapter extends ArrayAdapter<Song> {
                     R.layout.list_item, parent, false);
         }
 
-        Song currentWord = getItem(position);
+        Song currentSong = getItem(position);
 
         TextView songTitleTextView = (TextView) listItemView.findViewById(R.id.music_text_view);
-        songTitleTextView.setText(currentWord.getSongTitle());
-        songTitleTextView.setId(currentWord.getTextViewId());
+        songTitleTextView.setText(currentSong.getSongTitle());
+
 
         ImageView defaultImageView = (ImageView) listItemView.findViewById(R.id.image_view);
 
-        if (currentWord.hasImage()) {
-            defaultImageView.setImageResource(currentWord.getImageResourceId());
+        if (currentSong.hasImage()) {
+            defaultImageView.setImageResource(currentSong.getImageResourceId());
             defaultImageView.setVisibility(View.VISIBLE);
 
         } else {
