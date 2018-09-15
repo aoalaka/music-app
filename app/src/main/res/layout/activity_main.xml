@@ -49,6 +49,4 @@
         android:paddingTop="16dp"
         android:text="Playlists"
         android:textColor="#fffbf9" />
-
-
 </LinearLayout>
