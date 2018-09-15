@@ -89,6 +89,8 @@ public class NowPlayingActivity extends AppCompatActivity {
         mMediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songClicked.getAudioResourceId());
         // Start the audio file
         mMediaPlayer.start();
+        ImageView playPauseIcon = (ImageView) findViewById(R.id.play_pause);
+        playPauseIcon.setImageResource(R.drawable.icons8_pause_50);
 
 
         final int prevSongId;
@@ -107,9 +109,9 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
 
         //Selects the play-pause image
-        ImageView playPauseIcon = (ImageView) findViewById(R.id.play_pause);
+        ImageView playPause = (ImageView) findViewById(R.id.play_pause);
 
-        playPauseIcon.setOnClickListener(new View.OnClickListener() {
+        playPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView titleBar = (TextView) findViewById(R.id.song_title_now_playing);
@@ -131,18 +133,19 @@ public class NowPlayingActivity extends AppCompatActivity {
                     // We have audio focus now.
                     // Create and setup the {@link MediaPlayer} for the audio resource associated
                     // with the song clicked
-                    final Song songClicked = songs.get(songIdFromSongsActivity);
-                    mMediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songClicked.getAudioResourceId());
+                    /*final Song songClicked = songs.get(songIdFromSongsActivity);
+                    mMediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songClicked.getAudioResourceId());*/
                     /*// Start the audio file
                     mMediaPlayer.pause();
                     mMediaPlayer.seekTo(0);*/
 
-                    if (mMediaPlayer.isPlaying()){
+                    //Not working yet
+                    if (mMediaPlayer != null && mMediaPlayer.isPlaying()){
                         mMediaPlayer.pause();
-                        mMediaPlayer.seekTo(0);
-                        ImageView playPauseIcon = (ImageView) findViewById(R.id.play_pause);
-                        playPauseIcon.setImageResource(R.drawable.icons8_play_50);
-                    } else {
+//                        mMediaPlayer.seekTo(0);
+                        ImageView playPauseIconX = (ImageView) findViewById(R.id.play_pause);
+                        playPauseIconX.setImageResource(R.drawable.icons8_play_50);
+                    } else if (mMediaPlayer != null && !(mMediaPlayer.isPlaying())){
                         mMediaPlayer.start();
                         ImageView playPauseIcon = (ImageView) findViewById(R.id.play_pause);
                         playPauseIcon.setImageResource(R.drawable.icons8_pause_50);
@@ -150,12 +153,14 @@ public class NowPlayingActivity extends AppCompatActivity {
                     // Setup a listener on the media player, so that we can stop and release the
                     // media player once the sound has finished playing.
                     //mMediaPlayer.setOnCompletionListener(mCompletionListener);
-                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            String songTitle = songClicked.getSongTitle().toUpperCase();
-                            Toast.makeText(NowPlayingActivity.this, songTitle + " has finished playing", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    if(mMediaPlayer!=null){
+                        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            public void onCompletion(MediaPlayer mp) {
+                                String songTitle = songClicked.getSongTitle().toUpperCase();
+                                Toast.makeText(NowPlayingActivity.this, songTitle + " has finished playing", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
             }
         });

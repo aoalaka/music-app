@@ -38,7 +38,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/play_pause"
-            android:src="@drawable/icons8_pause_50"
             android:layout_weight="1"
             android:padding="16dp"/>
 
