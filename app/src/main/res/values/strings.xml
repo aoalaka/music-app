@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">QR Player</string>
+    <string name="song_title_1">Qur\'an 105</string>
+    <string name="song_title_2">Qur\'an 106</string>
+    <string name="song_title_3">Qur\'an 107</string>
+    <string name="song_title_4">Qur\'an 108</string>
+    <string name="song_title_5">Qur\'an 109</string>
+    <string name="song_title_6">Qur\'an 110</string>
+    <string name="song_title_7">Qur\'an 111</string>
+    <string name="song_title_8">Qur\'an 112</string>
+    <string name="song_title_9">Qur\'an 113</string>
+    <string name="song_title_10">Qur\'an 114</string>
 </resources>

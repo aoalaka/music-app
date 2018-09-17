@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="32dp"
-    android:background="#474733">
+    android:background="#474733"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,4 +51,9 @@
             android:src="@drawable/icons8_fast_forward_50"
             android:padding="16dp"/>
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to songs"
+        android:id="@+id/back_to_songs_list"/>
 </LinearLayout>

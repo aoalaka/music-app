@@ -1,27 +1,28 @@
 package com.example.android.qplayer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
+import android.view.View;
+import android.widget.Button;
 
 public class PlaylistsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.songs_list);
+        setContentView(R.layout.display_activity);
 
-        ArrayList<String> playlist = new ArrayList<>();
+        Button backToSongsListBtn = (Button) findViewById(R.id.back_to_home);
+        backToSongsListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //The code in this method will be executed when the albums View is clicked on.
+                Intent backToSongsListIntent = new Intent(PlaylistsActivity.this, MainActivity.class);
+                startActivity(backToSongsListIntent);
+            }
+        });
 
-        playlist.add("Recently added");
-        playlist.add("My recordings");
 
-        ArrayAdapter<String> playListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, playlist);
-
-        ListView listView = (ListView)findViewById(R.id.list);
-        listView.setAdapter(playListAdapter);
     }
 }

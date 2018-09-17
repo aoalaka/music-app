@@ -1,11 +1,13 @@
 package com.example.android.qplayer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,21 +76,32 @@ public class NowPlayingActivity extends AppCompatActivity {
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         final ArrayList<Song> songs = new ArrayList<Song>();
 
-        songs.add(new Song("Qur'an 105", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_105, 0));
-        songs.add(new Song("Qur'an 106", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_106, 1));
-        songs.add(new Song("Qur'an 107", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_107, 2));
-        songs.add(new Song("Qur'an 108", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_108, 3));
-        songs.add(new Song("Qur'an 109", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_109, 4));
-        songs.add(new Song("Qur'an 110", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_110, 5));
-        songs.add(new Song("Qur'an 111", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_111, 6));
-        songs.add(new Song("Qur'an 112", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_112, 7));
-        songs.add(new Song("Qur'an 113", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_113, 8));
-        songs.add(new Song("Qur'an 114", R.drawable.ic_play_arrow_white_24dp, R.raw.quran_114, 9));
+        songs.add(new Song(getString(R.string.song_title_1), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_105, 0));
+        songs.add(new Song(getString(R.string.song_title_2), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_106, 1));
+        songs.add(new Song(getString(R.string.song_title_3), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_107, 2));
+        songs.add(new Song(getString(R.string.song_title_4), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_108, 3));
+        songs.add(new Song(getString(R.string.song_title_5), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_109, 4));
+        songs.add(new Song(getString(R.string.song_title_6), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_110, 5));
+        songs.add(new Song(getString(R.string.song_title_7), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_111, 6));
+        songs.add(new Song(getString(R.string.song_title_8), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_112, 7));
+        songs.add(new Song(getString(R.string.song_title_9), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_113, 8));
+        songs.add(new Song(getString(R.string.song_title_10), R.drawable.ic_play_arrow_white_24dp, R.raw.quran_114, 9));
 
         final Song songClicked = songs.get(songIdFromSongsActivity);
         mMediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songClicked.getAudioResourceId());
         // Start the audio file
         mMediaPlayer.start();
+
+        Button backToSongsListBtn = (Button) findViewById(R.id.back_to_songs_list);
+        backToSongsListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //The code in this method will be executed when the albums View is clicked on.
+                Intent backToSongsListIntent = new Intent(NowPlayingActivity.this, SongsActivity.class);
+                startActivity(backToSongsListIntent);
+            }
+        });
+
         ImageView playPauseIcon = (ImageView) findViewById(R.id.play_pause);
         playPauseIcon.setImageResource(R.drawable.icons8_pause_50);
 
